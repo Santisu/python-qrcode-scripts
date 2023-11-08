@@ -1,7 +1,6 @@
 import qrcode
 import os
 from sys import argv, exit
-import shlex
 
 # Obtiene el nombre del archivo que contiene el script.
 NOMBRE_SCRIPT = os.path.basename(__file__)
@@ -11,8 +10,7 @@ def main():
         print(f"Uso: python {NOMBRE_SCRIPT} <'Datos para el archivo'> <'nombre del archivo de salida'>")
         exit(1)
     else:
-        datos = shlex.quote(argv[1])
-        crear_qr(datos, argv[2])
+        crear_qr(argv[1], argv[2])
 
 
 def crear_qr(datos: str, nombre: str):
@@ -30,7 +28,7 @@ def crear_qr(datos: str, nombre: str):
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_M,
-        box_size=10,
+        box_size=40,
         border=4,
     )
     nombre_archivo = f"{nombre}.png"
